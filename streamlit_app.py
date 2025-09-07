@@ -1,43 +1,22 @@
-import sys
+import streamlit as st
 
-def search_matrix(matrix, m, n, s):
-    for row in range(m):
-        left, right = 0, n - 1
-        while left <= right:
-            mid = (left + right) // 2
-            if matrix[row][mid] == s:
-                # Move left to find the first occurrence in this row
-                while mid > 0 and matrix[row][mid - 1] == s:
-                    mid -= 1
-                return f"{row} {mid}"
-            elif matrix[row][mid] < s:
-                left = mid + 1
-            else:
-                right = mid - 1
-    return "None"
+st.title("Commute Tree Cost Calculator 🌳")
+st.write("Find out how many trees your commute costs the planet each year!")
 
-def main():
-    input_data = sys.stdin.read().strip().splitlines()
-    idx = 0
+# User inputs
+distance = st.number_input("Enter your daily one-way commute distance (km):", min_value=0.0, step=0.1)
+mode = st.selectbox("Select your mode of transport:", ["Car", "Bus", "Bike"])
 
-    while idx < len(input_data):
-        m, n, k = map(int, input_data[idx].split())
-        idx += 1
-        if m == 0 and n == 0 and k == 0:
-            break
+# Constants
+kg_co2_per_km = {"Car": 0.21, "Bus": 0.05, "Bike": 0.0}  # kg CO₂ per km
+working_days = 250
+kg_co2_per_tree = 25  # annual CO₂ absorption per tree
 
-        # Read the matrix
-        matrix = []
-        for _ in range(m):
-            row = list(map(int, input_data[idx].split()))
-            idx += 1
-            matrix.append(row)
-
-        # Process each query
-        for _ in range(k):
-            s = int(input_data[idx])
-            idx += 1
-            print(search_matrix(matrix, m, n, s))
-
-if __name__ == "__main__":
-    main()
+# Calculate tree cost
+if distance > 0:
+    total_km = distance * 2 * working_days
+    total_co2 = total_km * kg_co2_per_km[mode]
+    trees_needed = total_co2 / kg_co2_per_tree
+    st.success(f"Your commute uses about **{trees_needed:.1f} trees** worth of CO₂ each year!")
+else:
+    st.info("Enter your commute distance to see the result.")
