@@ -1,7 +1,7 @@
 import streamlit as st
 
 # --- PAGE CONFIG ---
-st.set_page_config(page_title="Commute Tree Cost", page_icon="🌳", layout="centered")
+st.set_page_config(page_title="Your Commute Cost Calculator", page_icon="🌳", layout="centered")
 
 # --- HEADER ---
 st.markdown("<h1 style='text-align:center; font-size:48px;'>🌳 Commute Tree Cost</h1>", unsafe_allow_html=True)
