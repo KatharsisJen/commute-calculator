@@ -8,8 +8,8 @@ st.set_page_config(
 )
 
 # --- HEADER ---
-st.header("🌳 Your Commute Cost Calculator")
-st.subheader("Find out how many trees your commute costs each year! 🌱")
+st.header("Your Commute Cost Calculator")
+st.subheader("Find out how many trees your commute costs each year!")
 
 # --- INPUTS ---
 distance = st.number_input(
@@ -41,16 +41,15 @@ if distance > 0:
     trees = round(co2_kg / CO2_PER_TREE, 1)
 
     # --- DISPLAY ---
-    st.metric("🌲 Trees per year", f"{trees} trees")
+    st.metric("Trees per year", f"{trees} trees")
     st.progress(min(trees, 150) / 150)
 
     # --- FEEDBACK ---
     if trees <= 50:
-        st.success("🌟 Excellent! Your commute is very eco-friendly.")
+        st.success("Excellent! Your commute is very eco-friendly.")
     elif trees <= 100:
-        st.warning("😐 Moderate. Try using bus or bike more often.")
+        st.warning("Moderate impact. Try using bus or bike more often.")
     else:
-        st.error("🚨 High impact! Consider switching to greener options.")
+        st.error("High impact! Consider switching to greener options.")
 else:
-    st.info("Enter your distance above to calculate your tree cost 🌱")
-
+    st.info("Enter your distance above to calculate your tree cost.")
