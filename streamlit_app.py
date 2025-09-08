@@ -8,8 +8,8 @@ st.set_page_config(
 )
 
 # --- HEADER ---
-st.markdown("<h1 style='text-align:center; font-size:48px;'>🌳 Your Commute Cost Calculator</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align:center; font-size:20px;'>Find out how many trees your commute costs each year!</p>", unsafe_allow_html=True)
+st.header("🌳 Your Commute Cost Calculator")
+st.subheader("Find out how many trees your commute costs each year! 🌱")
 
 # --- INPUTS ---
 distance = st.number_input(
@@ -19,6 +19,7 @@ distance = st.number_input(
     value=30.0,
     step=1.0
 )
+
 mode = st.selectbox(
     "Select your transport mode:",
     ["Car", "Bus", "Bike"]
@@ -52,3 +53,4 @@ if distance > 0:
         st.error("🚨 High impact! Consider switching to greener options.")
 else:
     st.info("Enter your distance above to calculate your tree cost 🌱")
+
